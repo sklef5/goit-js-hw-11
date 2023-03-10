@@ -23,7 +23,6 @@ async function onClickSubmit(e) {
     Notiflix.Notify.failure("Fields cann't be empty");
     return;
   }
-  btnLoadMore.show();
   searchApi.query = inputFindField;
   searchApi.resetPage();
   addMoreImg();
@@ -34,15 +33,17 @@ function appendImage(data) {
 }
 
 async function addMoreImg() {
-  btnLoadMore.disable();
   const resposeData = await searchApi.catchImage();
   const { hits, totalHits, totalPage } = resposeData;
+  btnLoadMore.show();
   if (totalHits === 0) {
     Notiflix.Notify.failure(
       'Sorry, there are no images matching your search query. Please try again.'
     );
+    btnLoadMore.hide();
     return;
-  }
+  }  
+  btnLoadMore.disable();
   Notiflix.Notify.success(`Hooray! We found ${totalHits} images.`);
   appendImage(hits);
   if (searchApi.page - 1 > totalPage) {

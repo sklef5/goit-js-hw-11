@@ -6,7 +6,7 @@ const BASE_URL = 'https://pixabay.com/api/';
 const imageType = 'photo';
 const orientation = 'horizontal';
 const safesearch = 'true';
-const per_page = '120';
+const per_page = '40';
 
 export default class SearchApi {
   constructor() {
